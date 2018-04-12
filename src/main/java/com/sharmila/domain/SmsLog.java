@@ -2,13 +2,16 @@ package com.sharmila.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name="smslog")
@@ -16,13 +19,18 @@ public class SmsLog {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+	@Column(name="text",nullable=false)
 	private String text;
+	@NonNull
 	private long recieptent;
+	@NonNull
 	private long sender;
 	@CreatedDate
 	private Date sentDate;
 	private String value;
 
+	@OneToOne
+	private MsiSdn msiSdn;
 	
 	public SmsLog() {
 	}
@@ -43,6 +51,7 @@ public class SmsLog {
 		this.sentDate = builder.sentDate;
 		this.value=builder.value;
 		this.sender=builder.sender;
+		this.msiSdn=builder.msisdn;
 	}
 
 	public int getId() {
@@ -94,11 +103,19 @@ public class SmsLog {
 		this.value = value;
 	}
 
+	public MsiSdn getMsiSdn() {
+		return msiSdn;
+	}
+
+	public void setMsiSdn(MsiSdn msiSdn) {
+		this.msiSdn = msiSdn;
+	}
+
 
 	public static class Builder {
 		private int id;
 		private String text;
-		private String msisdn;
+		private MsiSdn msisdn;
 		private Date sentDate;
 		private String value;
 		private long recieptent;
@@ -109,7 +126,7 @@ public class SmsLog {
 			return this;
 		}
 
-		public Builder msisdn(String msisdn) {
+		public Builder msisdn(MsiSdn msisdn) {
 			this.msisdn = msisdn;
 			return this;
 		}

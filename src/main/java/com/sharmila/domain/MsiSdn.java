@@ -1,17 +1,20 @@
 package com.sharmila.domain;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="tableMSISDN")
 public class MsiSdn {
 
-	@EmbeddedId
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	@Column(name="msi_sdn")
+	@Column(name="msisdn")
 	private long msiSdn;
 	
 	public MsiSdn() {
