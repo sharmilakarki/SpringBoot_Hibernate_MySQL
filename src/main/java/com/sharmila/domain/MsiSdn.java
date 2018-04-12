@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tableMSISDN")
+@Table(name="tableMSISDNV11")
 public class MsiSdn {
 
 	@Id
@@ -18,6 +18,11 @@ public class MsiSdn {
 	private long msiSdn;
 	
 	public MsiSdn() {
+	}
+
+	public MsiSdn(long msiSdn) {
+		super();
+		this.msiSdn = msiSdn;
 	}
 
 	public MsiSdn(int id, long msiSdn) {

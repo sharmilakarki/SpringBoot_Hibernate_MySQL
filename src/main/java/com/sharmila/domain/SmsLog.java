@@ -22,7 +22,7 @@ public class SmsLog {
 	@Column(name="text",nullable=false)
 	private String text;
 	@NonNull
-	private long recieptent;
+	private long recipient;
 	@NonNull
 	private long sender;
 	@CreatedDate
@@ -39,7 +39,7 @@ public class SmsLog {
 		super();
 		this.id = id;
 		this.text = text;
-		this.recieptent = recieptent;
+		this.recipient = recieptent;
 		this.sender = sender;
 		this.sentDate = sentDate;
 		this.value = value;
@@ -47,7 +47,7 @@ public class SmsLog {
 
 	public SmsLog(Builder builder) {
 		this.text = builder.text;
-		this.recieptent = builder.recieptent;
+		this.recipient = builder.recipient;
 		this.sentDate = builder.sentDate;
 		this.value=builder.value;
 		this.sender=builder.sender;
@@ -69,14 +69,14 @@ public class SmsLog {
 	public void setText(String text) {
 		this.text = text;
 	}
-
 	
-	public long getRecieptent() {
-		return recieptent;
+
+	public long getRecipient() {
+		return recipient;
 	}
 
-	public void setRecieptent(long recieptent) {
-		this.recieptent = recieptent;
+	public void setRecipient(long recipient) {
+		this.recipient = recipient;
 	}
 
 	public long getSender() {
@@ -118,7 +118,7 @@ public class SmsLog {
 		private MsiSdn msisdn;
 		private Date sentDate;
 		private String value;
-		private long recieptent;
+		private long recipient;
 		private long sender;
 
 		public Builder id(String text) {
@@ -141,9 +141,8 @@ public class SmsLog {
 			return this;
 		}
 		
-		
-		public Builder recieptent(long recieptent) {
-			this.recieptent = recieptent;
+		public Builder recipient(long recipient) {
+			this.recipient = recipient;
 			return this;
 		}
 		public Builder sender(long sender) {

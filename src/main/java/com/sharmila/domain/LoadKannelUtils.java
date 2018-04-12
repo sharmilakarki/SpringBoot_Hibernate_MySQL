@@ -42,7 +42,14 @@ public class LoadKannelUtils {
 		//connectTokannel(username, password, url, new SmsLog());
 	}
 	
-	
+	/**
+	 * <p> Fake sms send from sender to reciever , message is in text/XML format with other informations.
+	 * Post method is used to send sms to fake smsc, IOUtils reads the inputstream data as string.
+	 * Url,username and passwords are read from properties file, the url is kannel's which is running as a service on the machine.
+	 *</p>
+	 * @param smsLog
+	 * @return
+	 */
 	public SmsLog sendFakeSms(SmsLog smsLog){
 		 String body=null;
 		logger.info(" username "+username);
@@ -52,7 +59,7 @@ public class LoadKannelUtils {
 
 		StringEntity stringEntity=null;
 		
-		String messageXML = "<message><submit><da><number>" + smsLog.getRecieptent() + "</number></da><oa><number>" + smsLog.getSender()
+		String messageXML = "<message><submit><da><number>" + smsLog.getRecipient() + "</number></da><oa><number>" + smsLog.getSender()
 				+ "</number></oa><ud>" + smsLog.getText() + "</ud><from><username>" + username + "</username><password>"
 				+ password + "</password></from><to>" + "send" + "</to></submit></message>";
 		InputStream inputStream;
@@ -69,10 +76,12 @@ public class LoadKannelUtils {
 			inputStream=response.getEntity().getContent();
              body = IOUtils.toString(inputStream);
             System.out.println(body);
-            if(body.equalsIgnoreCase("3: Queued for later delivery")){
-            	logger.info("Queuing processs");
-            	sms=smsLog;
-            }
+//            if(body.equalsIgnoreCase("3: Queued for later delivery")){
+//            	logger.info("Queuing processs");
+//            	sms=smsLog;
+//            }
+            sms=smsLog;
+            sms.setValue(body);
             EntityUtils.consume(stringEntity);
 
 		} catch (ClientProtocolException e) {

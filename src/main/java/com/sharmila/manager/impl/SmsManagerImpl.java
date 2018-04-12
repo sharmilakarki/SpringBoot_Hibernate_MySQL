@@ -1,5 +1,6 @@
 package com.sharmila.manager.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sharmila.domain.LoadKannelUtils;
+import com.sharmila.domain.MsiSdn;
 import com.sharmila.domain.SmsLog;
 import com.sharmila.manager.SmsManager;
 import com.sharmila.repository.SmsRepository;
@@ -30,19 +32,31 @@ public class SmsManagerImpl implements SmsManager {
 
 	@Override
 	public SmsLog sendSms(SmsLog smsLog) {
-		SmsLog sms = this.loadKannelUtils.sendFakeSms(smsLog);
-		if (sms != null) {
-			logger.info("sms is not null");
-			smsRepository.save(sms);
-		}
-		return sms;
+		return this.loadKannelUtils.sendFakeSms(smsLog);
 
 	}
 
 	@Override
 	public List<SmsLog> getAllLogs() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.smsRepository.findAll();
+	}
+	/**
+	 * <p>Save the smsLog in the database</p>
+	 */
+	@Override
+	public SmsLog saveSentSms(SmsLog smsLog) {
+		return this.smsRepository.save(smsLog);
+	}
+
+	@Override
+	public String sendSmsToBulk(List<MsiSdn> msisdn,SmsLog smsLog) {
+		List<SmsLog> msiSdnList=new ArrayList<SmsLog>();
+		
+		for(MsiSdn msi:msisdn){
+			smsLog.setRecipient(msi.getMsiSdn());
+			msiSdnList.add(this.saveSentSms(this.sendSms(smsLog)))	;
+		}
+		return String.valueOf(msiSdnList.size());
 	}
 
 }

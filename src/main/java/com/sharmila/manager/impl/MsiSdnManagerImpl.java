@@ -46,13 +46,24 @@ public class MsiSdnManagerImpl  implements MsiSdnManager{
 			
 			bufferedReader.close();
 			boolean alreadyExist=false;	
-			for (MsiSdn m : msisdnList) {
+			long lastIndex=this.msiSdnRepository.findAll().size();
+			if(lastIndex==0){
+				lastIndex=0;
+			}else{
+				lastIndex=lastIndex-1;
+			}
+			for (MsiSdn m : msisdnList.subList((int) lastIndex, msisdnList.size()-1)) {
 				alreadyExist = this.checkMsiSdnAlreadyExist(m.getMsiSdn());
 				if (alreadyExist == false) {
 					this.msiSdnRepository.save(m);
 				}
 			}
 			System.out.println("List Size "+msisdnList.size());
+			
+//			Iterable<MsiSdn> msiSdn=msisdnList;
+//			logger.info(" before saving msisdn");
+//			List<MsiSdn> response = this.msiSdnRepository.saveAll(msiSdn); 
+//			logger.info(" after saving "+response.size());
 			return msisdnList;
 		} catch (FileNotFoundException e) {
 			throw new FileNotFoundException();

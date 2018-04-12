@@ -37,6 +37,9 @@ dependencies {
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version: '1.5.4.RELEASE'
 	// https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
 	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.1'
+	// https://mvnrepository.com/artifact/org.springframework.batch/spring-batch-core
+compile group: 'org.springframework.batch', name: 'spring-batch-core', version: '4.0.1.RELEASE'
+
 	
 	// https://mvnrepository.com/artifact/commons-io/commons-io
 	compile group: 'commons-io', name: 'commons-io', version: '2.4'
