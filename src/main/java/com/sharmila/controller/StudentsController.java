@@ -9,7 +9,7 @@ import com.sharmila.domain.Students;
 import com.sharmila.repository.StudentsRepository;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/students")
 public class StudentsController {
 
 	@Autowired

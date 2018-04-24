@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,8 +42,8 @@ public class SmsController {
 	 * @param smsLog
 	 * @return
 	 */
-	@PostMapping("/to-all")
-	private String sendSmsToAllUsers(@RequestBody SmsLog smsLog){
+	@PostMapping(value="/to-all",consumes = {"application/x-www-form-urlencoded"})
+	private String sendSmsToAllUsers(@ModelAttribute("smsForm") SmsLog smsLog,BindingResult result){
 		List<MsiSdn> msisdn = this.msiSdnManager.getAll();
 		
 		return this.smsManager.sendSmsToBulk(msisdn, smsLog);

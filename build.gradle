@@ -32,14 +32,31 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 
  	compile 'mysql:mysql-connector-java'
+	
 	compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+	
 	compile("org.springframework.boot:spring-boot-starter-web")
+	
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version: '1.5.4.RELEASE'
+	
 	// https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
 	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.1'
+	
 	// https://mvnrepository.com/artifact/org.springframework.batch/spring-batch-core
-compile group: 'org.springframework.batch', name: 'spring-batch-core', version: '4.0.1.RELEASE'
 
+	compile group: 'org.springframework.batch', name: 'spring-batch-core', version: '4.0.1.RELEASE'
+
+	// https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper
+	compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '9.0.1'
+	
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-tomcat
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '2.0.1.RELEASE'
+	
+	// https://mvnrepository.com/artifact/org.eclipse.jdt.core.compiler/ecj
+	compile group: 'org.eclipse.jdt.core.compiler', name: 'ecj', version: '4.4.2'
+
+	// https://mvnrepository.com/artifact/javax.servlet/jstl
+	compile group: 'javax.servlet', name: 'jstl', version: '1.2'
 	
 	// https://mvnrepository.com/artifact/commons-io/commons-io
 	compile group: 'commons-io', name: 'commons-io', version: '2.4'
